@@ -1,0 +1,12 @@
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*
+
+# Temporary uploaded files
+public/temp/
+
+# VS Code settings folder
+.vscode/
