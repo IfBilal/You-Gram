@@ -1,8 +1,10 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext.jsx";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE;
 function LoginForm() {
+  const { user, setUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,13 +19,20 @@ function LoginForm() {
     }
     setLoading(true);
     axios
-      .post(`${apiUrl}/users/login`, {
-        username,
-        password,
-      },{
-        withCredentials: true,
-      })
+      .post(
+        `${apiUrl}/users/login`,
+        {
+          username,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
+        setUser(res.data.data.user);
+        console.log(res.data.data.user);
+        
         responseRef.current.textContent = "Logged in successfully";
         responseRef.current.className =
           "text-green-600 font-semibold text-center";
