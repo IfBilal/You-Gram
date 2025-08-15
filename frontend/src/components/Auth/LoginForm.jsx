@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext.jsx";
-
+import { useNavigate } from "react-router-dom";
 const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE;
 function LoginForm() {
   const { user, setUser } = useAuth();
@@ -9,6 +9,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const responseRef = useRef(null);
+  let navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -30,12 +31,13 @@ function LoginForm() {
         }
       )
       .then((res) => {
-        setUser(res.data.data.user);
-        console.log(res.data.data.user);
-        
+        setUser(res?.data?.data?.user);
+        console.log(res.data?.data?.user);
+
         responseRef.current.textContent = "Logged in successfully";
         responseRef.current.className =
           "text-green-600 font-semibold text-center";
+        navigate("/feed");
       })
       .catch((err) => {
         responseRef.current.textContent = err.response.data.message;

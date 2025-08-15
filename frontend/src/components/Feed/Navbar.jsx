@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 function Navbar() {
   let { user } = useAuth();
+  let navigate = useNavigate();
   return (
     <nav className="bg-gray-800 border-b border-gray-700 px-4 py-3">
       <div className="flex items-center justify-between max-w-6xl mx-auto">

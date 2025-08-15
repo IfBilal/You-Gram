@@ -12,6 +12,7 @@ const router = createBrowserRouter(
     <>
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/" element={<LoginPage />} />
+      <Route path="/feed" element={<Feed />} />
     </>
   )
 );
