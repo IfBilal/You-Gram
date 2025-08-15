@@ -85,6 +85,12 @@ const getUserImage = asyncHandler(async (req, res) => {
         $addFields: {
           likeCount: { $size: "$imageLikes" },
           owner: { $first: "$imageOwner" },
+          hasLiked: {
+            $in: [
+              new mongoose.Types.ObjectId(req.user._id),
+              "$imageLikes.likedBy",
+            ],
+          },
         },
       },
       { $unset: "owner.password" },
@@ -142,6 +148,12 @@ const getFeedImages = asyncHandler(async (req, res) => {
         $addFields: {
           likeCount: { $size: "$imageLikes" },
           owner: { $first: "$imageOwner" },
+          hasLiked: {
+            $in: [
+              new mongoose.Types.ObjectId(req.user._id),
+              "$imageLikes.likedBy",
+            ],
+          },
         },
       },
       { $unset: "owner.password" },

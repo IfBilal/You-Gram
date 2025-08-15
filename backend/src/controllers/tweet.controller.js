@@ -81,6 +81,12 @@ const getUserTweets = asyncHandler(async (req, res) => {
         $addFields: {
           likeCount: { $size: "$tweetLikes" },
           owner: { $first: "$tweetOwner" },
+          hasLiked: {
+            $in: [
+              new mongoose.Types.ObjectId(req.user._id),
+              "$tweetLikes.likedBy",
+            ],
+          },
         },
       },
       { $unset: "owner.password" },
@@ -138,6 +144,12 @@ const getFeedTweets = asyncHandler(async (req, res) => {
       $addFields: {
         likeCount: { $size: "$tweetLikes" },
         owner: { $first: "$tweetOwner" },
+        hasLiked: {
+          $in: [
+            new mongoose.Types.ObjectId(req.user._id),
+            "$tweetLikes.likedBy",
+          ],
+        },
       },
     },
     { $unset: "owner.password" },

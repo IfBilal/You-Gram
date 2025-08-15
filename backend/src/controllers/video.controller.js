@@ -110,6 +110,12 @@ const getVideoById = asyncHandler(async (req, res) => {
     if (!video) throw new ApiError(404, "Video with given id not found");
     video.views += 1;
     await video.save();
+    let hasLiked = await Like.findOne({
+      video: videoId,
+      likedBy: req.user._id,
+    });
+    if (!hasLiked) hasLiked = false;
+    else hasLiked = true;
     let user = await User.findByIdAndUpdate(
       req.user._id,
       { $addToSet: { watchHistory: video._id } },
@@ -118,7 +124,13 @@ const getVideoById = asyncHandler(async (req, res) => {
     let likeCount = await Like.countDocuments({ video: videoId });
     res
       .status(200)
-      .json(new ApiResponse(200, { video, likeCount }, "Video with given id"));
+      .json(
+        new ApiResponse(
+          200,
+          { video, likeCount, hasLiked },
+          "Video with given id"
+        )
+      );
   } catch (error) {
     if (error instanceof ApiError) throw error;
     throw new ApiError(500, "Something went wrong");

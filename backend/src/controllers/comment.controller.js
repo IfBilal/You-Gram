@@ -77,7 +77,7 @@ const getPostComments = asyncHandler(async (req, res) => {
           likeCount: { $size: "$likes" },
           ownerUsername: { $first: "$commentOwner.username" },
           ownerAvatar: { $first: "$commentOwner.avatar" },
-          isLiked: {
+          hasLiked: {
             $anyElementTrue: {
               $map: {
                 input: "$likes",
