@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Feed/Navbar";
 import FeedOptions from "../components/Feed/FeedOptions";
 import TweetsFeed from "../components/Feed/TweetsFeed";
-
+import ImageFeed from "../components/Feed/ImageFeed";
 function Feed() {
   const [activeTab, setActiveTab] = useState("tweets");
 
@@ -16,6 +16,7 @@ function Feed() {
           </div>
         </div>
         <div className="w-full">{activeTab === "tweets" && <TweetsFeed />}</div>
+        <div className="w-full">{activeTab === "images" && <ImageFeed />}</div>
       </div>
     </div>
   );
