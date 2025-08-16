@@ -7,8 +7,7 @@ function CommentCard({ comment, handleDeleteComment }) {
   const [hasLiked, setHasLiked] = useState(comment?.hasLiked || false);
   const [likeCount, setLikeCount] = useState(comment?.likeCount || 0);
   const { user } = useAuth();
-  // const userId = user?._id;
-  const userId = "6883ab5a62359ad5baaf8849";
+  const userId = user?._id;
   const isOwner = comment?.owner === userId;
 
   const handleLike = () => {
@@ -16,7 +15,11 @@ function CommentCard({ comment, handleDeleteComment }) {
       .post(
         `${import.meta.env.VITE_REACT_APP_API_BASE}/likes/toggle/comment/${
           comment._id
-        }`
+        }`,
+        {},
+        {
+          withCredentials: true,
+        }
       )
       .then((res) => {
         setHasLiked(!hasLiked);
