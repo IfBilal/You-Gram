@@ -139,25 +139,16 @@ const getVideoById = asyncHandler(async (req, res) => {
 
 const updateVideo = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
-  //TODO: update video details like title, description, thumbnail
   if (!isValidObjectId(videoId)) throw new ApiError(400, "Invalid video id");
-  let thumbnailPath = req.file?.path;
   let { title, description } = req.body;
-  if (!thumbnailPath || !title || !description)
+  if (!title || !description)
     throw new ApiError(400, "All fields are required");
 
-  let response = await uploadOnCloudinary(thumbnailPath);
-  if (!response) {
-    throw new ApiError(500, "Unable to upload on cloudinary");
-  }
   try {
     let video = await Video.findOne({ _id: videoId, owner: req.user._id });
     if (!video) throw new ApiError(404, "Video not found");
-    await deleteFromCloudinary(video.thumbnailPublicId);
     video.title = title;
     video.description = description;
-    video.thumbnailPublicId = response.public_id;
-    video.thumbnail = response.url;
     await video.save();
     res.status(200).json(new ApiResponse(200, video, "Video updated"));
   } catch (error) {

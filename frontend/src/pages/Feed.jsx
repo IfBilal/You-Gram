@@ -3,6 +3,7 @@ import Navbar from "../components/Feed/Navbar";
 import FeedOptions from "../components/Feed/FeedOptions";
 import TweetsFeed from "../components/Feed/TweetsFeed";
 import ImageFeed from "../components/Feed/ImageFeed";
+import VideoFeed from "../components/Feed/VideoFeed";
 function Feed() {
   const [activeTab, setActiveTab] = useState("tweets");
 
@@ -17,6 +18,7 @@ function Feed() {
         </div>
         <div className="w-full">{activeTab === "tweets" && <TweetsFeed />}</div>
         <div className="w-full">{activeTab === "images" && <ImageFeed />}</div>
+        <div className="w-full">{activeTab === "videos" && <VideoFeed  />}</div>
       </div>
     </div>
   );

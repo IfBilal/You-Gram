@@ -37,6 +37,6 @@ router
   .route("/:videoId")
   .get(getVideoById)
   .delete(deleteVideo)
-  .patch(uploadImages.single("thumbnail"), updateVideo);
+  .patch(updateVideo);
 
 export default router;
