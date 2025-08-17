@@ -130,6 +130,8 @@ function TweetCard({ tweet, handleDelete }) {
         }
       });
   }
+
+
   function addComment() {
     if (!newComment.trim()) return;
     axios
@@ -143,9 +145,26 @@ function TweetCard({ tweet, handleDelete }) {
         }
       )
       .then((res) => {
-        console.log(res);
         setCommentPage(1);
-        setComments([res.data.data, ...comments.slice(0, 19)]);
+        axios
+          .get(
+            `${import.meta.env.VITE_REACT_APP_API_BASE}/comments/tweet/${
+              tweet._id
+            }?page=${1}`,
+            {
+              withCredentials: true,
+            }
+          )
+          .then((res) => {
+            setComments(res?.data?.data?.comments);
+            setHasMoreComments(res?.data?.data?.hasMore);
+          })
+          .catch((err) => {
+            if (err.response.status === 498) {
+              navigate("/");
+            }
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
