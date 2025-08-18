@@ -35,6 +35,21 @@ function VideoFeed() {
     }
   }, []);
 
+  function handleDelete(videoId) {
+    axios
+      .delete(`${import.meta.env.VITE_REACT_APP_API_BASE}/videos/${videoId}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setVideos(videos.filter((video) => video._id !== videoId));
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status === 498) {
+          navigate("/");
+        }
+      });
+  }
   function toggleUploadForm() {
     setTitle("");
     setDescription("");
@@ -267,7 +282,7 @@ function VideoFeed() {
         </div>
       )}
       {videos.map((video) => (
-        <VideoCard key={video._id} video={video} />
+        <VideoCard key={video._id} video={video} handleDelete={handleDelete} />
       ))}
       {hasMoreVideos && (
         <div className="text-center mt-4">
