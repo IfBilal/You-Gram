@@ -2,30 +2,33 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TweetCard from "../Feed/TweetCard";
 import { useNavigate } from "react-router-dom";
-function ProfileTweets({userId}) {
+function ProfileTweets({ userId }) {
   let navigate = useNavigate();
   const [tweets, setTweets] = useState([]);
   const [hasMoreTweets, setHasMoreTweets] = useState(true);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if (tweets.length === 0) {
-      axios
-        .get(`${import.meta.env.VITE_REACT_APP_API_BASE}/tweets/user/${userId}?page=${1}`, {
+    axios
+      .get(
+        `${
+          import.meta.env.VITE_REACT_APP_API_BASE
+        }/tweets/user/${userId}?page=${1}`,
+        {
           withCredentials: true,
-        })
-        .then((res) => {
-          setTweets(res.data?.data?.tweets);
-          setHasMoreTweets(res.data?.data?.hasMore);
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response.status === 498) {
-            navigate("/");
-          }
-        });
-    }
-  }, []);
+        }
+      )
+      .then((res) => {
+        setTweets(res.data?.data?.tweets);
+        setHasMoreTweets(res.data?.data?.hasMore);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status === 498) {
+          navigate("/");
+        }
+      });
+  }, [userId]);
   function handleDelete(tweetId) {
     axios
       .delete(`${import.meta.env.VITE_REACT_APP_API_BASE}/tweets/${tweetId}`, {
@@ -46,7 +49,9 @@ function ProfileTweets({userId}) {
       setLoading(true);
       axios
         .get(
-          `${import.meta.env.VITE_REACT_APP_API_BASE}/tweets/user/${userId}?page=${page + 1}`,
+          `${
+            import.meta.env.VITE_REACT_APP_API_BASE
+          }/tweets/user/${userId}?page=${page + 1}`,
           {
             withCredentials: true,
           }

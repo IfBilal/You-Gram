@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import VideoCard from "../Feed/VideoCard";
 import { useNavigate } from "react-router-dom";
-function ProfileVideos({userId}) {
+function ProfileVideos({ userId }) {
   let navigate = useNavigate();
   const [videos, setVideos] = useState([]);
   const [loadingVideos, setLoadingVideos] = useState(false);
@@ -10,23 +10,26 @@ function ProfileVideos({userId}) {
   const [hasMoreVideos, setHasMoreVideos] = useState(true);
 
   useEffect(() => {
-    if (videos.length === 0) {
-      axios
-        .get(`${import.meta.env.VITE_REACT_APP_API_BASE}/videos/user/${userId}?page=${page}`, {
+    axios
+      .get(
+        `${
+          import.meta.env.VITE_REACT_APP_API_BASE
+        }/videos/user/${userId}?page=${page}`,
+        {
           withCredentials: true,
-        })
-        .then((res) => {
-          setVideos(res.data?.data?.videos);
-          setHasMoreVideos(res.data?.data?.hasMore);
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.respone.status === 498) {
-            navigate("/");
-          }
-        });
-    }
-  }, []);
+        }
+      )
+      .then((res) => {
+        setVideos(res.data?.data?.videos);
+        setHasMoreVideos(res.data?.data?.hasMore);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.respone.status === 498) {
+          navigate("/");
+        }
+      });
+  }, [userId]);
 
   function handleDelete(videoId) {
     axios
@@ -43,14 +46,15 @@ function ProfileVideos({userId}) {
         }
       });
   }
-  
 
   function loadMoreVideos() {
     if (!loadingVideos && hasMoreVideos) {
       setLoadingVideos(true);
       axios
         .get(
-          `${import.meta.env.VITE_REACT_APP_API_BASE}/videos/user/${userId}?page=${page + 1}`,
+          `${
+            import.meta.env.VITE_REACT_APP_API_BASE
+          }/videos/user/${userId}?page=${page + 1}`,
           {
             withCredentials: true,
           }
@@ -72,8 +76,6 @@ function ProfileVideos({userId}) {
         });
     }
   }
-
-  
 
   return (
     <div>

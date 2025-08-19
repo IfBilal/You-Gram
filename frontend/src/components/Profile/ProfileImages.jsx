@@ -10,28 +10,26 @@ function ProfileImages({ userId }) {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if (images.length === 0) {
-      axios
-        .get(
-          `${
-            import.meta.env.VITE_REACT_APP_API_BASE
-          }/images/user/${userId}?page=${1}`,
-          {
-            withCredentials: true,
-          }
-        )
-        .then((res) => {
-          setImages(res.data?.data?.images);
-          setHasMoreImages(res.data?.data?.hasMore);
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response.status === 498) {
-            navigate("/");
-          }
-        });
-    }
-  }, []);
+    axios
+      .get(
+        `${
+          import.meta.env.VITE_REACT_APP_API_BASE
+        }/images/user/${userId}?page=${1}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        setImages(res.data?.data?.images);
+        setHasMoreImages(res.data?.data?.hasMore);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status === 498) {
+          navigate("/");
+        }
+      });
+  }, [userId]);
 
   function handleDelete(imageId) {
     axios
