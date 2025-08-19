@@ -176,7 +176,7 @@ function TweetCard({ tweet, handleDelete }) {
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-4 shadow-lg">
       <div className="flex items-start mb-3">
-        <Link to={`/profile/${tweet.owner._id}`}>
+        <Link to={`/profile/${tweet.owner.username}`}>
           <img
             src={tweet.owner.avatar}
             alt={tweet.owner.username}
@@ -187,7 +187,7 @@ function TweetCard({ tweet, handleDelete }) {
           <div className="flex items-center justify-between">
             <div>
               <Link
-                to={`/profile/${tweet.owner._id}`}
+                to={`/profile/${tweet.owner.username}`}
                 className="hover:underline"
               >
                 <div className="font-semibold text-white hover:text-purple-300 transition-colors">
@@ -195,7 +195,7 @@ function TweetCard({ tweet, handleDelete }) {
                 </div>
               </Link>
               <Link
-                to={`/profile/${tweet.owner._id}`}
+                to={`/profile/${tweet.owner.username}`}
                 className="hover:underline"
               >
                 <div className="text-gray-400 text-sm hover:text-purple-300 transition-colors">

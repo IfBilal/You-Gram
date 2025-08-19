@@ -18,7 +18,7 @@ function Navbar() {
         </div>
         <div className="text-2xl font-bold text-purple-400">YouGram</div>
         <Link
-          to={`/profile/${user?._id}`}
+          to={`/profile/${user?.username}`}
           className="flex items-center space-x-2 px-3 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors"
         >
           <span className="text-lg">👤</span>

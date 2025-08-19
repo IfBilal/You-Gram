@@ -180,7 +180,7 @@ function ImageCard({ image, handleDelete }) {
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-4 shadow-lg">
       <div className="flex items-start mb-3">
-        <Link to={`/profile/${image.owner._id}`}>
+        <Link to={`/profile/${image.owner.username}`}>
           <img
             src={image.owner.avatar}
             alt={image.owner.username}
@@ -191,7 +191,7 @@ function ImageCard({ image, handleDelete }) {
           <div className="flex items-center justify-between">
             <div>
               <Link
-                to={`/profile/${image.owner._id}`}
+                to={`/profile/${image.owner.username}`}
                 className="hover:underline"
               >
                 <div className="font-semibold text-white hover:text-purple-300 transition-colors">
@@ -199,7 +199,7 @@ function ImageCard({ image, handleDelete }) {
                 </div>
               </Link>
               <Link
-                to={`/profile/${image.owner._id}`}
+                to={`/profile/${image.owner.username}`}
                 className="hover:underline"
               >
                 <div className="text-gray-400 text-sm hover:text-purple-300 transition-colors">

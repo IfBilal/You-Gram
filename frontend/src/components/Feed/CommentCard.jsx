@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 function CommentCard({ comment, handleDeleteComment }) {
@@ -36,18 +37,21 @@ function CommentCard({ comment, handleDeleteComment }) {
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-3 shadow-lg">
       <div className="flex items-start">
-        <img
-          src={comment.ownerAvatar}
-          alt={comment.ownerUsername}
-          className="w-8 h-8 rounded-full mr-3 object-cover border border-purple-500 hover:border-purple-300 transition-colors cursor-pointer"
-        />
-
+        <Link to={`/profile/${comment.ownerUsername}`}>
+          <img
+            src={comment.ownerAvatar}
+            alt={comment.ownerUsername}
+            className="w-8 h-8 rounded-full mr-3 object-cover border border-purple-500 hover:border-purple-300 transition-colors cursor-pointer"
+          />
+        </Link>
         <div className="flex-1">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center">
-              <span className="text-gray-400 text-xs hover:text-purple-300 transition-colors cursor-pointer">
-                @{comment.ownerUsername}
-              </span>
+              <Link to={`/profile/${comment.ownerUsername}`}>
+                <span className="text-gray-400 text-xs hover:text-purple-300 transition-colors cursor-pointer">
+                  @{comment.ownerUsername}
+                </span>
+              </Link>
               <span className="text-gray-500 text-xs ml-2">
                 {formatDistanceToNow(new Date(comment.createdAt))} ago
               </span>

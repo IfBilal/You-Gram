@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { formatDistanceToNow } from "date-fns";
+import { Link } from "react-router-dom";
 import {
   FaHeart,
   FaRegHeart,
@@ -260,15 +261,19 @@ function VideoPlayer() {
 
             <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
               <div className="flex items-center">
-                <img
-                  src={video.owner.avatar}
-                  alt={video.owner.username}
-                  className="w-10 h-10 rounded-full mr-3 object-cover border-2 border-purple-500"
-                />
+                <Link to={`/profile/${video.owner.username}`}>
+                  <img
+                    src={video.owner.avatar}
+                    alt={video.owner.username}
+                    className="w-10 h-10 rounded-full mr-3 object-cover border-2 border-purple-500"
+                  />
+                </Link>
                 <div>
-                  <p className="text-white font-medium">
-                    {video.owner.username}
-                  </p>
+                  <Link to={`/profile/${video.owner.username}`}>
+                    <p className="text-white font-medium">
+                      {video.owner.username}
+                    </p>
+                  </Link>
                   <p className="text-gray-400 text-sm">
                     {formatDistanceToNow(new Date(video.createdAt))} ago
                   </p>

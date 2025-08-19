@@ -8,6 +8,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import VideoPage from "./pages/VideoPage";
+import Profile from "./pages/Profile";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<LoginPage />} />
       <Route path="/feed" element={<Feed />} />
       <Route path="/video/:videoId" element={<VideoPage />} />
+      <Route path="/profile/:username" element={<Profile />} />
     </>
   )
 );
