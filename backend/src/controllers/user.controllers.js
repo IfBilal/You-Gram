@@ -51,8 +51,6 @@ let registerUser = asyncHandler(async (req, res) => {
       coverImagePublicId: coverImage.public_id,
     });
   } catch (err) {
-    console.log(err);
-    
     if (avatar) await deleteFromCloudinary(avatar.public_id);
     if (coverImage) await deleteFromCloudinary(coverImage.public_id);
     throw new ApiError(500, "User creation failed");
@@ -71,7 +69,7 @@ let logoutUser = asyncHandler(async (req, res) => {
   let options = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", 
+    sameSite: "none",
   };
   res
     .status(200)
@@ -108,7 +106,7 @@ let loginUser = asyncHandler(async (req, res) => {
     let options = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      sameSite: "none",
     };
     console.log("Access and refresh token generated");
 
@@ -168,11 +166,11 @@ let refreshAccessToken = async (req, res) => {
     let { accessToken, refreshToken: newRefreshToken } =
       await generateAccessAndRefreshToken(user._id);
 
-      let options = {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", 
-      };
+    let options = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "none",
+    };
 
     req.user = user;
     res
