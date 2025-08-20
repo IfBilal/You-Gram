@@ -3,20 +3,12 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 let app = express();
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://you-gram.vercel.app", // ✅ no /api/v1
-];
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://you-gram.vercel.app"); 
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); 
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"); 
-  next();
-});
+const allowedOrigins = ["http://localhost:5173", "https://you-gram.vercel.app"];
 
 app.use(
   cors({
     origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, Postman, etc.)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -26,12 +18,13 @@ app.use(
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    optionsSuccessStatus: 200, 
   })
 );
 
-
 app.use((req, res, next) => {
   console.log("Origin:", req.headers.origin);
+  console.log("Method:", req.method);
   next();
 });
 
