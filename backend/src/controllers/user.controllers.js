@@ -69,8 +69,6 @@ let logoutUser = asyncHandler(async (req, res) => {
   let options = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "none",
-    path: "/",
   };
   res
     .status(200)
@@ -107,8 +105,6 @@ let loginUser = asyncHandler(async (req, res) => {
     let options = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
-      path:"/",
     };
     console.log("Access and refresh token generated");
 
@@ -171,8 +167,6 @@ let refreshAccessToken = async (req, res) => {
     let options = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
-      path: "/",
     };
 
     req.user = user;
