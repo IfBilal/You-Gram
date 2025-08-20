@@ -79,7 +79,7 @@ let logoutUser = asyncHandler(async (req, res) => {
 
 let loginUser = asyncHandler(async (req, res) => {
   console.log(req.body);
-  
+
   let { username, password } = req.body;
   if (!username || !password) {
     throw new ApiError(400, "All fields are required");
@@ -191,7 +191,7 @@ let changePassword = asyncHandler(async (req, res) => {
     }
     let response = await user.isPasswordCorrect(currentPassword);
     if (!response) {
-      throw new ApiError(400, "Wrong current password");
+      throw new ApiError(410, "Wrong current password");
     }
     user.password = newPassword;
     await user.save();
@@ -199,6 +199,9 @@ let changePassword = asyncHandler(async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, user, "Password changed successfully"));
   } catch (error) {
+    if (error instanceof ApiError) {
+      throw error;
+    }
     throw new ApiError(500, error?.message || "Something went wrong");
   }
 });
@@ -226,7 +229,7 @@ let updateAccountDetails = asyncHandler(async (req, res) => {
 
     if (existingUser) {
       throw new ApiError(
-        400,
+        410,
         "Another user with same username or email already exists"
       );
     }
@@ -245,6 +248,9 @@ let updateAccountDetails = asyncHandler(async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, user, "Account data updated successfuly"));
   } catch (error) {
+    if (error instanceof ApiError) {
+      throw error;
+    }
     throw new ApiError(500, error?.message || "Something went wrong");
   }
 });
