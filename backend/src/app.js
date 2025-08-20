@@ -18,15 +18,12 @@ app.use(
       }
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ✅ allow preflight
-    allowedHeaders: ["Content-Type", "Authorization"], // ✅ allow headers
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// ✅ handle preflight explicitly
-app.options("*", cors());
 
-// Debug middleware
 app.use((req, res, next) => {
   console.log("Origin:", req.headers.origin);
   next();
