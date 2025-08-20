@@ -2,7 +2,11 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 let app = express();
-const allowedOrigins = ["http://localhost:5173", "https://you-gram.vercel.app/api/v1"];
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://you-gram.vercel.app", // ✅ no /api/v1
+];
 
 app.use(
   cors({
@@ -14,10 +18,15 @@ app.use(
       }
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ✅ allow preflight
+    allowedHeaders: ["Content-Type", "Authorization"], // ✅ allow headers
   })
 );
 
+// ✅ handle preflight explicitly
+app.options("*", cors());
 
+// Debug middleware
 app.use((req, res, next) => {
   console.log("Origin:", req.headers.origin);
   next();
