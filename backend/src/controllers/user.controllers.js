@@ -51,6 +51,8 @@ let registerUser = asyncHandler(async (req, res) => {
       coverImagePublicId: coverImage.public_id,
     });
   } catch (err) {
+    console.log(err);
+    
     if (avatar) await deleteFromCloudinary(avatar.public_id);
     if (coverImage) await deleteFromCloudinary(coverImage.public_id);
     throw new ApiError(500, "User creation failed");
