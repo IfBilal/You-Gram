@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 let app = express();
-const allowedOrigins = ["http://localhost:5173", "https://you-gram.vercel.app"];
+const allowedOrigins = ["http://localhost:5173", "https://you-gram.vercel.app/api/v1"];
 
 app.use(
   cors({
