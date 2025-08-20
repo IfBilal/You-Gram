@@ -26,7 +26,6 @@ function LoginForm() {
           username,
           password,
         },
-        {},
         {
           withCredentials: true,
         }
