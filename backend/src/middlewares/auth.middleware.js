@@ -6,8 +6,6 @@ import { refreshAccessToken } from "../controllers/user.controllers.js";
 const verifyJWT = async (req, res, next) => {
   try {
     const accessToken = req.cookies?.accessToken;
-    console.log(req.cookies);
-
     if (!accessToken) {
       await refreshAccessToken(req, res);
       return next();
