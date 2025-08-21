@@ -8,7 +8,6 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-import fs from "fs/promises";
 
 let registerUser = asyncHandler(async (req, res) => {
   let { username, email, fullname, password } = req.body;

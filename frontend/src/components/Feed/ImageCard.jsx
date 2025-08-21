@@ -232,7 +232,6 @@ function ImageCard({ image, handleDelete }) {
         </div>
       </div>
 
-      {/* Image Display */}
       <div className="mb-4">
         <img
           src={image.imageFile}
@@ -253,7 +252,6 @@ function ImageCard({ image, handleDelete }) {
         <div className="mb-4 text-gray-200">{editedDescription}</div>
       )}
 
-      {/* Action Buttons */}
       <div className="flex items-center text-gray-400 border-t border-gray-700 pt-3">
         <button
           onClick={handleLike}
@@ -306,7 +304,6 @@ function ImageCard({ image, handleDelete }) {
         </button>
       </div>
 
-      {/* Comments Section */}
       {showComments && (
         <div className="mt-4 pt-3 border-t border-gray-700">
           <div className="flex mt-3">
