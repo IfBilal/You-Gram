@@ -2,7 +2,6 @@
 
 A modern, full-featured social media application built with the MERN stack, featuring real-time interactions, secure authentication, and seamless image sharing capabilities.
 
-![You-Gram Banner](https://via.placeholder.com/800x200/4F46E5/FFFFFF?text=You-Gram+Social+Media+App)
 
 ## 🚀 Features
 
