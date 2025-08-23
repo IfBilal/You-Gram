@@ -2,6 +2,7 @@
 
 A modern, full-featured social media application built with the MERN stack, featuring real-time interactions, secure authentication, and seamless image sharing capabilities.
 
+#### Video Demo:  https://youtu.be/nL_tDohbuT4?si=rvvtQY862JR7S68l 
 
 ## 🚀 Features
 
@@ -120,6 +121,9 @@ npm run dev
 - MongoDB team for powerful aggregation pipelines
 - Cloudinary for reliable image hosting
 
+## 🎓 CS50 Final Project
+
+This project was created as part of Harvard's **CS50x Final Project**.
 ---
 
 ⭐ If you found this project helpful, please give it a star!
