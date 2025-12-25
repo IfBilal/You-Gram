@@ -2,7 +2,7 @@
 
 A modern, full-featured social media application built with the MERN stack, featuring real-time interactions, secure authentication, and seamless image sharing capabilities.
 
-#### Video Demo: https://www.linkedin.com/posts/muhammad-bilal-tahir-_webdevelopment-mern-react-activity-7364374440198995968-REAE?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFAbL4MBZ--REDBDuHh8CeN0sjD5pWZIYrY
+#### Video Demo: https://www.linkedin.com/posts/m-bilaltahir_webdevelopment-mern-react-activity-7364374440198995968-hyPp?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFAbL4MBZ--REDBDuHh8CeN0sjD5pWZIYrY
 
 ## 🚀 Features
 
